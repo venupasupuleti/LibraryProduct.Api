@@ -1,0 +1,160 @@
+{
+  "info": {
+    "name": "LibraryProduct API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "API Collection for Library + Product modules"
+  },
+  "item": [
+    {
+      "name": "Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Sample Product\",\n  \"description\": \"desc\",\n  \"sku\": \"SKU-001\",\n  \"category\": \"General\",\n  \"price\": 99.5,\n  \"quantityInStock\": 10,\n  \"manufacturer\": \"MyCo\",\n  \"weight\": \"1kg\",\n  \"dimensions\": \"10x10x5\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "products" ]
+        }
+      }
+    },
+    {
+      "name": "Get Product By Id",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/products/1",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "products", "1" ]
+        }
+      }
+    },
+    {
+      "name": "List Products",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/products?search=&category=&page=1&pageSize=10&sort=",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "products" ]
+        }
+      }
+    },
+    {
+      "name": "Update Product",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated Product\",\n  \"description\": \"Updated desc\",\n  \"sku\": \"SKU-001\",\n  \"category\": \"General\",\n  \"price\": 120.0,\n  \"quantityInStock\": 5,\n  \"manufacturer\": \"MyCo\",\n  \"weight\": \"1kg\",\n  \"dimensions\": \"10x10x5\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products/1",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "products", "1" ]
+        }
+      }
+    },
+    {
+      "name": "Delete Product",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/api/products/1",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "products", "1" ]
+        }
+      }
+    },
+    {
+      "name": "Borrow Book",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"borrowerId\": 1, \"bookId\": 1, \"days\": 7 }"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/library/borrow",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "library", "borrow" ]
+        }
+      }
+    },
+    {
+      "name": "Return Book",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"borrowerId\": 1, \"bookId\": 1 }"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/library/return",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "library", "return" ]
+        }
+      }
+    },
+    {
+      "name": "External BookInfo (Mock)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/external/bookinfo/9780140449136",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "external", "bookinfo", "9780140449136" ]
+        }
+      }
+    },
+    {
+      "name": "External Logs",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/external/logs",
+          "host": [ "{{baseUrl}}" ],
+          "path": [ "api", "external", "logs" ]
+        }
+      }
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          "if (!pm.environment.get('baseUrl')) {",
+          "  pm.environment.set('baseUrl', 'https://localhost:7243');",
+          "}"
+        ]
+      }
+    }
+  ]
+}
